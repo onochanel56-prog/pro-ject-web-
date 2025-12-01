@@ -13,6 +13,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 // รวมไฟล์เชื่อมต่อฐานข้อมูล
 include "config.php";
 $current_user = $_SESSION['username'];
+
+// **********************************************
+// *** โค้ดที่เพิ่ม: สร้าง Session Token สำหรับ Sell Report ***
+// **********************************************
+// Token นี้จะถูกใช้ตรวจสอบความถูกต้องในการเข้าถึง sellout.php และใช้งานได้เพียงครั้งเดียว
+// (ต้องใช้ PHP 7 ขึ้นไป หรือใช้ฟังก์ชันอื่นในการสร้าง Random Token ที่ปลอดภัย)
+$sellout_token = bin2hex(random_bytes(16));
+$_SESSION['SELLOUT_ACCESS_TOKEN'] = $sellout_token;
+// **********************************************
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,13 +72,15 @@ $current_user = $_SESSION['username'];
     </div>
 </div>
 
-<nav class="bg-[#156B32] shadow-md sticky top-0 z-40 border-b-4 border-[#07E34E]"> <div class="max-w-7xl mx-auto px-4">
+<nav class="bg-[#156B32] shadow-md sticky top-0 z-40 border-b-4 border-[#07E34E]"> 
+    <div class="max-w-7xl mx-auto px-4">
         <div class="flex justify-between h-16">
 
-            <div class="flex items-center">
+            <div class="flex items-center space-x-3">
+                <img src="logo.png" alt="Company Logo" class="h-10 w-auto rounded-lg border-2 border-white">
+                
                 <span class="text-2xl font-extrabold text-white">ຫນ້າ Dashboard</span>
             </div>
-
             <div class="flex items-center space-x-4">
 
                 <button onclick="openModal()" class="relative text-white">
@@ -100,16 +112,16 @@ $current_user = $_SESSION['username'];
 
     <h3 class="text-xl font-semibold mb-3">✨ โฆษณาและโปรโมชั่น</h3>
     <div class="flex overflow-x-auto space-x-4 p-4 bg-white rounded-xl shadow-inner card-scroll-container mb-10">
-        <div class="w-64 h-32 bg-yellow-400 rounded-lg shadow text-white flex items-center justify-center font-bold">
+        <div class="w-64 h-32 bg-yellow-400 rounded-lg shadow text-white flex items-center justify-center font-bold flex-shrink-0">
             โปรโมชั่นสิ้นปี
         </div>
-        <div class="w-64 h-32 bg-pink-500 rounded-lg shadow text-white flex items-center justify-center font-bold">
+        <div class="w-64 h-32 bg-pink-500 rounded-lg shadow text-white flex items-center justify-center font-bold flex-shrink-0">
             อัปเดตสินค้าใหม่
         </div>
-        <div class="w-64 h-32 bg-purple-500 rounded-lg shadow text-white flex items-center justify-center font-bold">
+        <div class="w-64 h-32 bg-purple-500 rounded-lg shadow text-white flex items-center justify-center font-bold flex-shrink-0">
             เทรนนิ่งรอบใหม่
         </div>
-        <div class="w-64 h-32 bg-green-500 rounded-lg shadow text-white flex items-center justify-center font-bold">
+        <div class="w-64 h-32 bg-green-500 rounded-lg shadow text-white flex items-center justify-center font-bold flex-shrink-0">
             นโยบายใหม่
         </div>
     </div>
@@ -126,28 +138,27 @@ $current_user = $_SESSION['username'];
             <span class="font-bold text-gray-700">check stock</span>
         </a>
 
-        <a href="sellout.php" class="bg-white p-6 rounded-xl shadow hover:shadow-lg border-t-4 border-red-500 flex flex-col items-center">
+        <a href="sellout.php?token=<?= $sellout_token ?>" class="bg-white p-6 rounded-xl shadow hover:shadow-lg border-t-4 border-red-500 flex flex-col items-center">
             <svg class="w-8 h-8 text-red-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
             </svg>
             <span class="font-bold text-gray-700">Sell Report</span>
         </a>
-
         <div class="col-span-2 md:col-span-3 bg-white p-4 rounded-xl shadow border-t-4 border-green-500">
             <h4 class="font-semibold text-gray-700 mb-3">ข้อมูลสรุปและรายงาน</h4>
 
             <div class="flex overflow-x-auto space-x-4 card-scroll-container">
 
-                <div class="w-48 h-32 bg-blue-100 rounded-xl flex items-center justify-center font-semibold text-blue-700">
+                <div class="w-48 h-32 bg-blue-100 rounded-xl flex items-center justify-center font-semibold text-blue-700 flex-shrink-0">
                     report 1
                 </div>
 
-                <div class="w-48 h-32 bg-orange-100 rounded-xl flex items-center justify-center font-semibold text-orange-700">
+                <div class="w-48 h-32 bg-orange-100 rounded-xl flex items-center justify-center font-semibold text-orange-700 flex-shrink-0">
                     report 2
                 </div>
 
-                <div class="w-48 h-32 bg-teal-100 rounded-xl flex items-center justify-center font-semibold text-teal-700">
+                <div class="w-48 h-32 bg-teal-100 rounded-xl flex items-center justify-center font-semibold text-teal-700 flex-shrink-0">
                     report 3
                 </div>
 
