@@ -39,7 +39,7 @@ if (isset($_POST['login'])) {
         exit;
     } else {
         // การเข้าสู่ระบบล้มเหลว
-        $error = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง!";
+        $error = "ຊື່ຜູ້ໃຊ້ຫລືລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ";
     }
     $stmt->close();
 }
@@ -165,17 +165,17 @@ input[type="submit"]:hover {
 <body>
 
 <div class="login-container">
-    <h2>เข้าสู่ระบบ</h2>
+    <h2>Login</h2>
     <?php if($error) echo "<div class='error'>$error</div>"; ?>
     <form method="post">
-        <input type="text" name="username" placeholder="ชื่อผู้ใช้" required>
-        <input type="password" name="password" placeholder="รหัสผ่าน" required>
-        <input type="submit" name="login" value="เข้าสู่ระบบ">
+        <input type="text" name="username" placeholder="User" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="submit" name="login" value="Login">
     </form>
     
-    <div class="register-link">
-        ยังไม่มีบัญชี? <a href="register.php">ลงทะเบียนที่นี่</a>
-    </div>
+    <!--<div class="register-link">
+        not have acccount yet? <a href="register.php">ລົງທະບຽນບ່ອນນີ້</a>
+    </div> -->
 </div>
 
 </body>

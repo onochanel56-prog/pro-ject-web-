@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sell Out Dashboard</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f5f5f5; }
+        table { width: 100%; border-collapse: collapse; background: #fff; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background: #eee; }
+    </style>
+</head>
+
+<body>
+
+<h2>Sell Out Dashboard</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Invoice No</th>
+            <th>Sale Man</th>
+            <th>Customer</th>
+            <th>Phone</th>
+            <th>Date</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Color</th>
+            <th>IMEI</th>
+            <th>Qty</th>
+            <th>Net Price</th>
+        </tr>
+    </thead>
+    <tbody id="sellout-table">
+        <tr><td colspan="11" style="text-align:center;">Loading...</td></tr>
+    </tbody>
+</table>
+
+<script>
+async function loadData() {
+    try {
+        const response = await fetch("sellout_api.php");
+        const result = await response.json();
+        const data = result.datas || [];
+
+        let html = "";
+
+        data.forEach(item => {
+            html += `
+                <tr>
+                    <td>${item.InvoiceNo}</td>
+                    <td>${item.SaleMan}</td>
+                    <td>${item.CustomerName}</td>
+                    <td>${item.Phone}</td>
+                    <td>${item.InvoiceDate}</td>
+                    <td>${item.BrandID}</td>
+                    <td>${item.ModelID}</td>
+                    <td>${item.ColorID}</td>
+                    <td>${item.PhoneIMEI}</td>
+                    <td>${item.QtyOrder}</td>
+                    <td>${item.NetPrice}</td>
+                </tr>
+            `;
+        });
+
+        document.getElementById("sellout-table").innerHTML = html;
+
+    } catch (e) {
+        document.getElementById("sellout-table").innerHTML =
+            `<tr><td colspan="11" style="text-align:center;color:red;">Error loading data</td></tr>`;
+    }
+}
+
+loadData();
+</script>
+
+</body>
+</html>

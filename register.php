@@ -202,11 +202,11 @@ input[type="submit"]:hover {
 <body>
 
 <div class="register-container">
-    <h2>ลงทะเบียนผู้ใช้งาน</h2>
+    <h2>ລົງທະບຽນຜູ້ໃຊ້ງານ</h2>
     <?php if($error) echo "<div class='error'>$error</div>"; ?>
     <?php if($success) echo "<div class='success'>$success</div>"; ?>
     <form method="post">
-        <label for="username">ชื่อผู้ใช้:</label>
+        <label for="username">ຊື່ຜູ້ໃຊ້:</label>
         <input type="text" id="username" name="username" placeholder="Username" 
                value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>" required>
         

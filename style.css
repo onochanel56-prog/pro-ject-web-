@@ -1,0 +1,88 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Lao&display=swap');
+
+/* ใช้ฟอนต์กับทุก element */
+* {
+    font-family: 'Noto Sans Lao', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.search {
+    width: 100%;
+    max-width: 480px;
+    padding: 10px;
+    margin: 10px auto;
+    display: block;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.filter-box {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.filter-box input, .filter-box select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+table {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto 20px auto;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f4f4f4;
+}
+
+.lowstock {
+    color: red;
+    font-weight: bold;
+}
+
+mark {
+    background: #fffb91;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+table {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto 20px auto;
+
+    border-radius: 10px; /* โค้งมุม table */
+    overflow: hidden; /* ป้องกัน border-radius ไม่ทำงาน */
+    background: #fff;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
